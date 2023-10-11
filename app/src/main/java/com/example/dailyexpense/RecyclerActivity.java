@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -144,7 +145,12 @@ public class RecyclerActivity extends AppCompatActivity {
 
         temp.setText("No. of days taking while calculating avg: "+(difference_in_days+1));
 
-        return Float.parseFloat(sum)/(difference_in_days+1);
+
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        Float f = Float.parseFloat(sum)/(difference_in_days+1);
+
+        return Float.parseFloat(df.format(f));
 
     }
 }

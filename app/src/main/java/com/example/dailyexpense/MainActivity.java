@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText priceET, typeET;
     private AutoCompleteTextView autoCompleteTV;
     private Button addBtn, showBtn;
+
+    private TextInputEditText textInputEditTextType;
 
     MyDatabase myDb;
 
@@ -65,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         addBtn = findViewById(R.id.addBtn);
         showBtn = findViewById(R.id.showBtn);
         autoCompleteTV = findViewById(R.id.autoCompleteTV);
+
+//        textInputEditTextType = findViewById(R.id.textInputEditTextType);
 
 
         myDb = new MyDatabase(getApplicationContext());
@@ -118,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //remember to give functionality of clicking on this button
+//              //when there will be no data in the start
                 Intent intent = new Intent(MainActivity.this, RecyclerActivity.class);
                 intent.putExtra("regular", "showData");
                 startActivity(intent);

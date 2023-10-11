@@ -9,17 +9,56 @@
     android:orientation="vertical"
     >
 
-
-    <EditText
-        android:id="@+id/priceET"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutAmount"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_margin="15dp"
-        android:padding="15dp"
-        android:inputType="number"
+        android:layout_height="60dp"
+        android:layout_margin="25dp"
         android:hint="Amount"
-        />
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:startIconDrawable="@drawable/baseline_attach_money_24"
+        app:endIconMode="clear_text"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/priceET"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutType"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="25dp"
+        android:hint="Expense Note"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:startIconDrawable="@drawable/baseline_event_note_24"
+        app:endIconMode="clear_text"
+        >
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTV"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:completionThreshold="1"
+            android:maxLines="3"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <EditText-->
+<!--        android:id="@+id/priceET"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:padding="15dp"-->
+<!--        android:inputType="number"-->
+<!--        android:hint="Amount"-->
+<!--        />-->
 
 <!--    <EditText-->
 <!--        android:id="@+id/typeET"-->
@@ -31,17 +70,17 @@
 <!--        android:hint="Type of expense"-->
 <!--        />-->
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTV"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_margin="15dp"
-        android:padding="15dp"
-        android:hint="Auto complete TextView"
-        android:completionThreshold="1"
-        android:maxLines="3"
-        />
+<!--    <AutoCompleteTextView-->
+<!--        android:id="@+id/autoCompleteTV"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:padding="15dp"-->
+<!--        android:hint="Auto complete TextView"-->
+<!--        android:completionThreshold="1"-->
+<!--        android:maxLines="3"-->
+<!--        />-->
 
     <Button
         android:id="@+id/addBtn"
