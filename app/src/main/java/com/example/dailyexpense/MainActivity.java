@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private AutoCompleteTextView autoCompleteTV;
     private Button addBtn, showBtn;
 
-    private TextInputEditText textInputEditTextType;
 
     MyDatabase myDb;
 
@@ -69,9 +68,6 @@ public class MainActivity extends AppCompatActivity {
         addBtn = findViewById(R.id.addBtn);
         showBtn = findViewById(R.id.showBtn);
         autoCompleteTV = findViewById(R.id.autoCompleteTV);
-
-//        textInputEditTextType = findViewById(R.id.textInputEditTextType);
-
 
         myDb = new MyDatabase(getApplicationContext());
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -47,6 +48,15 @@ public class myAdapter extends RecyclerView.Adapter<Holder> {
             }
         });
 
+        holder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
     }
 
     @Override
@@ -63,10 +73,12 @@ class Holder extends RecyclerView.ViewHolder{
 
     TextView type, price;
     LinearLayout layout;
+    ImageView imageViewDelete;
     public Holder(@NonNull View itemView) {
         super(itemView);
         type = itemView.findViewById(R.id.type);
         price = itemView.findViewById(R.id.price);
         layout = itemView.findViewById(R.id.layout);
+        imageViewDelete = itemView.findViewById(R.id.imageViewDelete);
     }
 }
