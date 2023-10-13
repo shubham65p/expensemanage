@@ -1,12 +1,22 @@
 package com.example.dailyexpense;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.renderscript.Sampler;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +33,6 @@ public class RecyclerActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     myAdapter adapter;
     TextView total_expenditure, dailyAvg,temp;
-
     MyDatabase myDb;
 
     @Override
@@ -39,6 +48,8 @@ public class RecyclerActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recylerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
 
     }
@@ -67,17 +78,16 @@ public class RecyclerActivity extends AppCompatActivity {
 
 
 
-        adapter = new myAdapter(MyModelClass.arrayList, getApplicationContext(), new myAdapter.ItemClickListener() {
+        adapter = new myAdapter(MyModelClass.arrayList, this, new myAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int i) {
-                String s = MyModelClass.arrayList.get(i).get(0);
+                String s = MyModelClass.arrayList.get(i).get(1);
                 Intent intent = new Intent(getApplicationContext(), MainActivity3.class);
                 try{
                     Date d = new SimpleDateFormat("dd-MM-yyyy").parse(s);
 
                     Cursor res = myDb.getTypePrice(s);
                     setDataToModelClassArraylist(res);
-
                     intent.putExtra("string", s);
 
                 }catch (Exception e) {
@@ -88,6 +98,14 @@ public class RecyclerActivity extends AppCompatActivity {
 
                 startActivity(intent);
             }
+
+            @Override
+            public void onDeleteImageClick(int position, View view) {
+
+                MyModelClass.showDialog(position, view, adapter, myDb, RecyclerActivity.this);
+
+           }
+
         });
 
         recyclerView.setAdapter(adapter);
@@ -100,14 +118,21 @@ public class RecyclerActivity extends AppCompatActivity {
 
     }
 
+
+
     void setDataToModelClassArraylist(Cursor res){
         MyModelClass.arrayList.clear();
         while (res.moveToNext()) {
 
-            String type = res.getString(0);
-            String price = res.getString(1);
+            try {
+                String id = String.valueOf(res.getInt(0));
+                String type = res.getString(1);
+                String price = res.getString(2);
 
-            new MyModelClass(type, price);
+                new MyModelClass(id, type, price);
+            }catch (Exception e){
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
 
         }
 
@@ -143,7 +168,7 @@ public class RecyclerActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        temp.setText("No. of days taking while calculating avg: "+(difference_in_days+1));
+//        temp.setText("No. of days taking while calculating avg: "+(difference_in_days+1));
 
 
         DecimalFormat df = new DecimalFormat();

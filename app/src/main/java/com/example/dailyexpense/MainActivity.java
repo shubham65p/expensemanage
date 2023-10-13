@@ -30,7 +30,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText priceET, typeET;
+    private EditText priceET, typeET, tv;
     private AutoCompleteTextView autoCompleteTV;
     private Button addBtn, showBtn;
 
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         addBtn = findViewById(R.id.addBtn);
         showBtn = findViewById(R.id.showBtn);
         autoCompleteTV = findViewById(R.id.autoCompleteTV);
+//        tv = findViewById(R.id.tv);
 
         myDb = new MyDatabase(getApplicationContext());
 

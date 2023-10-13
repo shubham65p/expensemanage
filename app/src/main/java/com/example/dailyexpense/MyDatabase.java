@@ -72,12 +72,12 @@ public class MyDatabase extends SQLiteOpenHelper {
     public Cursor showData(){
         SQLiteDatabase db = getWritableDatabase();
         String s = " GROUP BY Type";
-        return db.rawQuery("select  Type, (sum(Price))    from "+TableName+s, null);
+        return db.rawQuery("select Id, Type, (sum(Price))    from "+TableName+s, null);
     }
     public Cursor showDailyData(){
         SQLiteDatabase db = getWritableDatabase();
         String s = " GROUP BY Date";
-        return db.rawQuery("select  Date, (sum(Price))   from "+TableName+s, null);
+        return db.rawQuery("select  Id, Date, (sum(Price))   from "+TableName+s, null);
     }
 
     public Cursor getDistinctType(){
@@ -92,12 +92,13 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     public Cursor getTypePrice(String d){
         SQLiteDatabase db = getWritableDatabase();
-//        String s = "select Type, Price from "+TableName+" "
-        return db.rawQuery("select Type, Price from "+TableName+" where Date like '%"+d+"%'", null);
+        String query = "select Id, Type, Price from "+TableName+" where Date = ?";
+        return db.rawQuery(query, new String[]{d});
     }
     public Cursor getDatePrice(String type){
         SQLiteDatabase db = getWritableDatabase();
-        return db.rawQuery("select Date, Price from "+TableName+" where Type like '%"+type+"%'", null);
+        String query = "select Id, Type, Price from "+TableName+" where Type = ?";
+        return db.rawQuery(query, new String[]{type});
     }
 
 //    public Cursor getDailyAvg(){
